@@ -84,14 +84,12 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'fleetman_db',
-        'USER': 'fleetman_user',
-        'PASSWORD': 'FleetMan2026!',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
+    'default': dj_database_url.config(
+        # Use the DATABASE_URL env var if it exists (Render).
+        # Fall back to localhost for local development.
+        default='postgres://fleetman_user:FleetMan2026!@localhost:5432/fleetman_db',
+        conn_max_age=600
+    )
 }
 
 
